@@ -1,0 +1,25 @@
+# .semgrep.yml — Custom Semgrep rules for this project
+rules:
+  - id: flask-debug-enabled
+    patterns:
+      - pattern: app.run(..., debug=True, ...)
+    message: "Flask debug mode is enabled. Never use debug=True in production."
+    languages: [python]
+    severity: ERROR
+
+  - id: hardcoded-secret
+    pattern-either:
+      - pattern: password = "..."
+      - pattern: secret_key = "..."
+      - pattern: api_key = "..."
+    message: "Possible hardcoded secret detected. Use environment variables instead."
+    languages: [python]
+    severity: WARNING
+
+  - id: sql-string-concat
+    patterns:
+      - pattern: |
+          "SELECT ... " + $VAR
+    message: "Possible SQL injection via string concatenation. Use parameterized queries."
+    languages: [python]
+    severity: ERROR
