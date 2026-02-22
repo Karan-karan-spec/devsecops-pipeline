@@ -122,7 +122,7 @@ jobs:
         with:
           project: "devsecops-demo-app"
           path: "."
-          format: "HTML,JSON"
+          format: "HTML"
           args: >
             --enableRetired
             --failOnCVSS 9
