@@ -19,7 +19,7 @@ WORKDIR /app
 COPY --from=builder /install /usr/local
 
 # Copy application source
-COPY app/ .
+COPY . .
 
 # Set ownership
 RUN chown -R appuser:appuser /app
